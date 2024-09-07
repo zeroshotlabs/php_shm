@@ -1,0 +1,24 @@
+{
+    "name": "stackware/phphi/posix_shm",
+    "description": "An FFI POSIX shared memory implementation for PHP",
+    "type": "library",
+    "require": {
+        "php": ">=0.0",
+        "ext-ffi": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "stackware\\posix_shm\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "make"
+        ],
+        "post-update-cmd": [
+            "make clean",            
+            "make"
+        ]
+    }
+}
+
