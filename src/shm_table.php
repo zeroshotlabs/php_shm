@@ -5,7 +5,8 @@ namespace stackware\ffi\posix_shm;
 
 use FFI;
 
-abstract class shm_table {
+abstract class shm_table
+{
     public FFI $ffi;
     public $shm_addr;
     public string $name;
@@ -14,7 +15,8 @@ abstract class shm_table {
     public array $columns = [];
     public array $column_offsets = [];
 
-    public function __construct(string $name, int $max_rows, array $columns, int $oflag, int $mode) {
+    public function __construct(string $name, int $max_rows, array $columns, int $oflag, int $mode)
+    {
         $this->ffi = FFI::cdef(file_get_contents("ext/shm_table.h"), "ext/lib/shm_table.so");
 
         $this->name = $name;
@@ -22,7 +24,8 @@ abstract class shm_table {
         $this->columns = $columns;
 
         $this->row_size = 0;
-        foreach ($columns as $column => $length) {
+        foreach( $columns as $column => $length )
+        {
             $this->column_offsets[$column] = $this->row_size;
             $this->row_size += max(1, $length);
         }

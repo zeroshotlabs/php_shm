@@ -2,36 +2,6 @@
 namespace stackware\ffi\posix_shm;
 
 
-// $shm_name = "/my_shared_memory";
-// $sem_name = "/my_semaphore";
-// $capacity = 100; // Maximum number of items in the deque
-// $shm_size = 16 + ($capacity * 256); // head + tail + data
-// $oflag = O_CREAT | O_RDWR;
-// $mode = 0666;
-
-// try {
-//     // Initialize deque
-//     $deque = new posix_shm_deque($shm_name, $capacity, $oflag, $mode, $sem_name);
-
-//     // Push items
-//     $deque->push("First Item");
-//     $deque->push("Second Item");
-
-//     // Pop items
-//     echo $deque->pop() . PHP_EOL; // Outputs: First Item
-//     echo $deque->pop() . PHP_EOL; // Outputs: Second Item
-
-//     // Check if empty
-//     var_dump($deque->isEmpty()); // bool(true)
-
-//     // Clean up
-//     $deque->delete();
-// } catch (Exception $e) {
-//     echo "Error: " . $e->getMessage() . PHP_EOL;
-// }
-
-
-
 class posix_shm_deque extends posix_shm_table_base
 {
     // Metadata offsets
@@ -54,7 +24,8 @@ class posix_shm_deque extends posix_shm_table_base
         }
     }
 
-    public function push(array $row): void {
+    public function push(array $row): void
+    {
         $head = $this->readColumn(self::HEAD_OFFSET, $this->columns[0]);
         $tail = $this->readColumn(self::TAIL_OFFSET, $this->columns[0]);
         $next_head = ($head + 1) % $this->capacity;
@@ -69,7 +40,8 @@ class posix_shm_deque extends posix_shm_table_base
         $this->writeColumn(self::HEAD_OFFSET, $this->columns[0], $next_head);
     }
 
-    public function pop(): array {
+    public function pop(): array
+    {
         $tail = $this->readColumn(self::TAIL_OFFSET, $this->columns[0]);
 
         if ($tail == $this->readColumn(self::HEAD_OFFSET, $this->columns[0])) {
@@ -82,7 +54,8 @@ class posix_shm_deque extends posix_shm_table_base
         return $row;
     }
 
-    public function size(): int {
+    public function size(): int
+    {
         $head = $this->readColumn(self::HEAD_OFFSET, $this->columns[0]);
         $tail = $this->readColumn(self::TAIL_OFFSET, $this->columns[0]);
 

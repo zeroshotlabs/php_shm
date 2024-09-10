@@ -1,0 +1,4 @@
+[submodule "libphphi"]
+	path = libphphi
+	url = https://github.com/stackware/libphphi.git
+
