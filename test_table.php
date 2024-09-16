@@ -1,4 +1,7 @@
-<?php
+<?php declare(strict_types=1);
+namespace zeroshotlabs\libphphi;
+
+
 namespace stackware\ffi\posix_shm;
 
 use stackware\posix_shm\shm_table;

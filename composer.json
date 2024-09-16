@@ -2,6 +2,8 @@
     "name": "stackware/phphi/posix_shm",
     "description": "An FFI POSIX shared memory implementation for PHP",
     "type": "library",
+    "license": "gpl-3.0-or-later",
+
     "require": {
         "php": ">=0.0",
         "ext-ffi": "*"
